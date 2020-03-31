@@ -49,8 +49,10 @@ class Startup(models.Model):
 
 class NewsLink(models.Model):
     title = models.CharField(max_length=31)
-    slug = AutoSlugField(max_length=31)
-    populate_from = ['title'],
+    slug = AutoSlugField(
+        max_length=31,
+        populate_from=['title'],
+    )
     pub_date = models.DateField('Date Published')
     link = models.URLField(max_length=255)
     startup = models.ForeignKey(

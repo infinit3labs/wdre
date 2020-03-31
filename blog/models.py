@@ -8,8 +8,10 @@ class Post(models.Model):
     slug = models.SlugField(max_length=63)
     text = models.TextField()
     pub_date = models.DateField('Date Published')
-    tags = models.ManyToManyField(Tag)
-    startups = models.ManyToManyField(Startup)
+    tags = models.ManyToManyField(Tag,
+                                  related_name="blog_posts")
+    startups = models.ManyToManyField(Startup,
+                                      related_name="blog_posts")
 
     class Meta:
         get_latest_by = 'pub_date'

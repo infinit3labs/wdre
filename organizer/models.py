@@ -35,7 +35,8 @@ class Startup(models.Model):
     contact = models.EmailField()
     # Default length is 200 char - too small
     website = models.URLField(max_length=255)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag,
+                                  related_name="startups")
 
     class Meta:
         ordering = ['name']

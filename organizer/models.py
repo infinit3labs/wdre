@@ -1,4 +1,5 @@
 from django.db import models
+from django_extensions.db.fields import AutoSlugField
 
 
 class Tag(models.Model):
@@ -6,9 +7,9 @@ class Tag(models.Model):
         max_length=31,
         unique=True,
     )
-    slug = models.SlugField(
+    slug = AutoSlugField(
         max_length=31,
-        unique=True,
+        populate_from=['name'],
         help_text='A label for URL config.'
     )
 
@@ -25,9 +26,9 @@ class Startup(models.Model):
         max_length=31,
         db_index=True,
     )
-    slug = models.SlugField(
+    slug = AutoSlugField(
         max_length=31,
-        unique=True,
+        populate_from=['name'],
         help_text='A label for URL config.'
     )
     description = models.TextField()
@@ -48,7 +49,8 @@ class Startup(models.Model):
 
 class NewsLink(models.Model):
     title = models.CharField(max_length=31)
-    slug = models.SlugField(max_length=31)
+    slug = AutoSlugField(max_length=31)
+    populate_from = ['title'],
     pub_date = models.DateField('Date Published')
     link = models.URLField(max_length=255)
     startup = models.ForeignKey(

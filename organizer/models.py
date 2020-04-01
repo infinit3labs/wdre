@@ -64,6 +64,7 @@ class NewsLink(models.Model):
         get_latest_by = 'pub_date'
         # Ensures that when slug and startup are used together, they must be unique in the db
         unique_together = ['slug', 'startup']
+        # Shows in admin view
         verbose_name = 'News Article'
 
     def __str__(self):

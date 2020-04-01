@@ -21,6 +21,7 @@ class Post(models.Model):
     class Meta:
         get_latest_by = 'pub_date'
         ordering = ['-pub_date', 'title']
+        # Shows in admin view
         verbose_name = 'Blog Post'
 
     def __str__(self):

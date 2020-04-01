@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 
-if [[ "$#" = 0 ]]
+if [ "$#" = 0 ]
 then
-    python3.7 -m pip freeze
+    python3 -m pip freeze
 fi
 
 postgres_ready() {
-python3.7 << END
+python3 << END
 from sys import exit
 from psycopg2 import connect, OperationalError
 try:
@@ -30,13 +30,13 @@ done;
 
 >&2 echo "Postgres is available"
 
-if [[ "$#" = 0 ]]
+if [ "$#" = 0 ]
 then
     >&2 echo "No command detected; running default commands"
     >&2 echo "Running migrations"
-    python3.7 manage.py migrate --noinput
+    python3 manage.py migrate --noinput
     >&2 echo "\n\nStarting development server: 127.0.0.1:8000\n\n"
-    python3.7 manage.py runserver 0.0.0.0:8000
+    python3 manage.py runserver 0.0.0.0:8000
 else
     >&2 echo "Command detected; running command"
     exec "$@"

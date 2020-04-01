@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from environ import Env
+
+
+ENV = Env()
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
     # Third Party
     'rest_framework',
     'django_extensions',
+    'django_environ',
     # First Party
     'blog.apps.BlogConfig',
     'organizer.apps.OrganizerConfig',
@@ -80,15 +86,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'wdre',
-        'USER': 'wdreuser',
-        'PASSWORD': '#)F*HF93[eoidj',
-        'HOST': 'localhost',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'wdre',
+#         'USER': 'wdreuser',
+#         'PASSWORD': '#)F*HF93[eoidj',
+#         'HOST': 'localhost',
+#     }
+# }
+
+DATABASES = {'default': ENV.db('DATABASE_URL')}
 
 
 # Password validation
